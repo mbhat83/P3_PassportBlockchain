@@ -41,16 +41,17 @@ def load_contract():
 contract = load_contract()
 
 # Add a form to add a travel record
+st.markdown("# Travel Log ")
 st.write('# Add Travel Record')
 with st.form(key='add_travel_record'):
     passport_id = st.text_input('Passport ID')
-    passport_expiration_date = st.number_input('Passport Expiration Date', value=0)
+    passport_expiration_date = st.date_input('Passport Expiration Date')
     full_name = st.text_input('Full Name')
     country_of_residence = st.text_input('Country of Residence')
     country_of_origin = st.text_input('Country of Origin')
     destination_country = st.text_input('Destination Country')
-    entry_date = st.number_input('Entry Date', value=0)
-    planned_exit_date = st.number_input('Planned Exit Date', value=0)
+    entry_date = st.date_input('Entry Date')
+    planned_exit_date = st.date_input('Planned Exit Date')
 
     if st.form_submit_button('Submit'):
         # Call the addTravelRecord function on the contract
@@ -69,7 +70,7 @@ with st.form(key='add_travel_record'):
 st.write('# Update Travel Record')
 with st.form(key='update_travel_record'):
     passport_id = st.text_input('Passport ID')
-    exit_date = st.number_input('Exit Date', value=0)
+    exit_date = st.date_input('Exit Date')
 
     if st.form_submit_button('Submit'):
         # Call the updateTravelRecord function on the contract
@@ -82,6 +83,12 @@ with st.form(key='update_travel_record'):
 st.write('# Get Travel Record')
 with st.form(key='get_travel_record'):
     passport_id = st.text_input('Passport ID')
-    entry_date = st.number_input('Entry Date', value=0)
+    entry_date = st.date_input('Entry Date')
 
+    if st.form_submit_button('Submit'):
+        # Call the updateTravelRecord function on the contract
+        tx_hash = contract.functions.getTravelRecord(
+            passport_id,
+            entry_date
+        ).transact()
    
