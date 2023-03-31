@@ -86,7 +86,7 @@ with st.form(key='get_travel_record'):
     entry_date = st.date_input('Entry Date')
 
     if st.form_submit_button('Submit'):
-        # Call the updateTravelRecord function on the contract
+        # Call the getTravelRecord function on the contract
         tx_hash = contract.functions.getTravelRecord(
             passport_id,
             entry_date
